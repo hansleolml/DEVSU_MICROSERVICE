@@ -33,7 +33,7 @@ pipeline {
                         def now = new Date()
                         customImage.push('latest')
                         customImage.push(now.format("yyMMddHHmmss", TimeZone.getTimeZone('UTC')))
-                        sh "docker rmi -f ${env.REPOSITORY_DOCKER}:${env.BUILD_ID} ${env.REPOSITORY}:latest"
+                        sh "docker rmi -f ${env.REPOSITORY_DOCKER}:${env.BUILD_ID} ${env.REPOSITORY_DOCKER}:latest"
                     }
                 }
             }
