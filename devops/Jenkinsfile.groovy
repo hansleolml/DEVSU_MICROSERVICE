@@ -5,6 +5,7 @@ pipeline {
     environment {
         REPOSITORY_DOCKER    = 'hansleolml/devsu'
         AZ_DOCKER_KEY_ID     = 'jenkins-user-for-docker-repository'
+        AZ_K8S_KEY_ID        = 'jenkins-user-for-k8s-azure'
     }
     stages {
         stage('Git Checkout'){
@@ -36,6 +37,13 @@ pipeline {
                         sh "docker rmi -f ${env.REPOSITORY_DOCKER}:${env.BUILD_ID} ${env.REPOSITORY_DOCKER}:latest"
                     }
                 }
+            }
+        }
+        stage('deploy k8s') {
+            steps {
+                withCredentials([azureServicePrincipal(AZ_K8S_KEY_ID)]) {
+                    sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                }                   
             }
         }
     }
