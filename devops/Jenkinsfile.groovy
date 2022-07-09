@@ -1,16 +1,11 @@
 pipeline {
-    agent any
-    environment {
-        AZ_DOCKER_KEY_ID     = 'jenkins-user-for-docker-repository'
-        REPOSITORY_DOCKER    = 'hansleolml/reto_devsu'
-        REPOSITORY_GIT       = 'https://github.com/hansleolml/DEVSU_MICROSERVICE.git'
-        AZ_K8S_KEY_ID        = 'jenkins-user-for-k8s-azure'
-        AZ_GIT_KEY_ID        = 'jenkins-user-for-git-repository'
+    agent {
+        label 'built-in'
     }
     stages {
-        stage('Git Clone'){
+        stage('Git Checkout'){
             steps {
-                git credentialsId: AZ_GIT_KEY_ID, url: REPOSITORY_GIT
+                checkout scm
             }
         }
         stage('Prueba') {
