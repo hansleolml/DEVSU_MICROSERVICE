@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.validation.constraints.NotBlank;
-import io.swagger.annotations.ApiModelProperty;
 
 @Getter
 @Setter
@@ -15,8 +14,6 @@ import io.swagger.annotations.ApiModelProperty;
 @NoArgsConstructor
 public class MessageDTO {
 
-  @ApiModelProperty(value = "numero de solicitud con la compra de la poliza", example = "12345678912345")
-  
   @NotBlank
   private String message;
 
