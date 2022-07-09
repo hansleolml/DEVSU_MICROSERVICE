@@ -13,11 +13,12 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Prueba') {
-            steps {
-                sh("docker -v")
-                sh("az --version")
-                sh("ls -la")
+        stage('SonarQube analysis') {
+            steps{
+                sh("chmod u+x gradlew")
+                withSonarQubeEnv('sonarqube-9.5') { 
+                sh './gradlew sonarqube'
+                }
             }
         }
         stage('Docker Build') {
