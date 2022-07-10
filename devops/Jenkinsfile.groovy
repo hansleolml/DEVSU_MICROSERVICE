@@ -40,10 +40,17 @@ pipeline {
                 }
             }
         }
-        stage('deploy k8s') {
+        stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([azureServicePrincipal(AZ_K8S_KEY_ID)]) {
                     sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                }                   
+            }
+        }
+        stage('Deploy to APIM') {
+            steps {
+                script {
+                    sh 'az apim api import -g rg-devsu-dev-centralUs-001 --service-name apim-devsu-dev-centralUs-001 --path dev --subscription-key-header-name X-Parse-REST-API-Key --subscription-key-query-param-name subscription-key --api-id openapi-definition --api-version v1 --api-version-set-id 62ca714fb19f79aae4479f96 --specification-url http://20.96.236.6/v3/api-docs.yaml --specification-format OpenApiJson'
                 }                   
             }
         }
