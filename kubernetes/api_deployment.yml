@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devsuprueba-dev
+  namespace: nsdevsu-dev
+  labels:
+    app: devsuprueba-dev 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devsuprueba-dev
+  template:
+    metadata:
+      labels:
+        app: devsuprueba-dev 
+    spec:
+      containers:
+      - name: devsuprueba-dev 
+        image: hansleolml/devsu:latest
+        ports:
+        - containerPort: 9091

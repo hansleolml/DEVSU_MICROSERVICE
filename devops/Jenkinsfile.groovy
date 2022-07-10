@@ -44,6 +44,9 @@ pipeline {
             steps {
                 withCredentials([azureServicePrincipal(AZ_K8S_KEY_ID)]) {
                     sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                    sh 'az aks get-credentials --resource-group rg-devsu-dev-centralUs-001 --name aks-devsu-dev-centralUs-001 --subscription ae272f53-0ce5-4e22-9041-f236c379f851'
+                    sh 'kubectl apply -f ./kubernetes/api_deployment.yml -n nsdevsu-dev'
+                    sh 'kubectl rollout restart deployment/devsuprueba-dev -n nsdevsu-dev'
                 }                   
             }
         }
