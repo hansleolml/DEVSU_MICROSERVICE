@@ -25,7 +25,7 @@ public class MessageController {
 
     @PostMapping("/DevOps")
     @ApiOperation(value = "", notes = "", response = MessageResponse.class)
-    public Mono<ResponseEntity<MessageResponse>> sendMessage(@RequestHeader("api-key") String apiKey,
+    public Mono<ResponseEntity<MessageResponse>> sendMessage(@RequestHeader("X-Parse-REST-API-Key") String apiKey,
                                                              @RequestBody @Valid MessageDTO messageDTO) throws Exception {
   
       if (!Objects.equals(apiKey, "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c")) throw new Exception();
