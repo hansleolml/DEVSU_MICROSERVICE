@@ -21,7 +21,7 @@ public class MessageControllerTest {
     void test1(){
         client.post()
         .uri("/DevOps")
-        .header("api-key", "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c")
+        .header("X-Parse-REST-API-Key", "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c")
         .accept(MediaType.APPLICATION_JSON)
         .contentType(MediaType.APPLICATION_JSON)
         .body(Mono.just(MessageDTO.builder()
