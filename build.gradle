@@ -4,6 +4,7 @@ plugins {
 	id "org.springdoc.openapi-gradle-plugin" version "1.3.4"
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'com.devsu'
@@ -17,6 +18,17 @@ repositories {
 openApi {
 	apiDocsUrl.set("http://localhost:9091/v3/api-docs.yaml")
 } 
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+    dependsOn test
+}
+
+tasks.named('sonarqube').configure {
+    dependsOn jacocoTestReport
+}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
