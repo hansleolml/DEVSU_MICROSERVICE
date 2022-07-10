@@ -13,7 +13,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('SonarQube analysis') {
+        stage('test - SonarQube analysis') {
             steps{
                 sh("chmod u+x gradlew")
                 withSonarQubeEnv('sonarqube-9.5') { 
@@ -21,14 +21,14 @@ pipeline {
                 }
             }
         }
-        stage('Docker Build') {
+        stage('build - Docker') {
             steps {
                 script{
                     customImage = docker.build(REPOSITORY_DOCKER +":${env.BUILD_ID}")
                 }
             }
         }
-        stage('Push Docker') {
+        stage('Push - Image Docker') {
             steps {
                 script {
                     docker.withRegistry('',AZ_DOCKER_KEY_ID) {
