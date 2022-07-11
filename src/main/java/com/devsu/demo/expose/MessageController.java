@@ -30,7 +30,7 @@ public class MessageController {
   
       if (!Objects.equals(apiKey, "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c")) throw new Exception();
       return Mono.just(new ResponseEntity<>(MessageResponse.builder()
-          .message("Hello " + messageDTO.getFrom() + " your message will be send")
+          .message("Hello " + messageDTO.getTo() + " your message will be send")
           .build(), HttpStatus.OK));
     }
   
