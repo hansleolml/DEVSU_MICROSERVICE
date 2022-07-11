@@ -47,6 +47,7 @@ pipeline {
                     sh 'az aks get-credentials --resource-group rg-devsu-dev-centralUs-001 --name aks-devsu-dev-centralUs-001 --subscription ae272f53-0ce5-4e22-9041-f236c379f851'
                     sh 'kubectl apply -f ./kubernetes/api_deployment.yml -n nsdevsu-prod'
                     sh 'kubectl rollout restart deployment/devsuprueba-prod -n nsdevsu-prod'
+                    sh 'sleep 10'
                 }                   
             }
         }
